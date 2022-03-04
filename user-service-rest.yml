@@ -1,0 +1,26 @@
+server:
+  port: 8085
+
+app:
+  service:
+    name: user-service-rest
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  flyway:
+    user: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/
+    driver-class-name: org.postgresql.Driver
+    validate-on-migrate: false
+    baseline-on-migrate: true
+    mixed: true
+    schemas: user_service_rest

@@ -1,0 +1,54 @@
+property:
+  test: 'barev'
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: 'true'
+          lower-case-service-id: 'true'
+          
+      routes:
+      
+        - id: user-service-rest
+          uri: lb://user-service-rest
+          predicates:
+            Path=/api/v1/users/**
+          filters:
+            - AuthFilter
+            
+        - id: mail-service-rest
+          uri: lb://mail-service-rest
+          predicates:
+            Path=/api/v1/mail-sender/**
+          filters:
+            - AuthFilter
+            
+        - id: auth-service-rest
+          uri: lb://auth-service-rest
+          predicates:
+            Path=/auth/**
+            
+management:
+  security:
+    enabled: false
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway     
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    preferIpAddress: true
