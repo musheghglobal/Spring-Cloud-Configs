@@ -7,7 +7,7 @@ app:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/
+    url: jdbc:postgresql://user-service-rest
     username: postgres
     password: root
   jpa:
@@ -18,7 +18,7 @@ spring:
   flyway:
     user: postgres
     password: root
-    url: jdbc:postgresql://localhost:5432/
+    url: jdbc:postgresql://user-service-rest
     driver-class-name: org.postgresql.Driver
     validate-on-migrate: false
     baseline-on-migrate: true
